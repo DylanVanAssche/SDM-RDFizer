@@ -4532,7 +4532,7 @@ def translate_sql(triples_map):
                 if "}" in s:
                     subject = s.split("}")[0]
                     if "[" in subject:
-                        subject = subject.split("[")
+                        subject = subject.split("[")[0]
                     if subject not in proyections:
                         proyections.append(subject)
     else:
@@ -4614,7 +4614,7 @@ def translate_postgressql(triples_map):
 				if "}" in s:
 					subject = s.split("}")[0]
 					if "[" in subject:
-						subject = subject.split("[")
+						subject = subject.split("[")[0]
 					if subject not in proyections:
 						proyections.append(subject)
 
@@ -4634,7 +4634,7 @@ def translate_postgressql(triples_map):
 					if "}" in po_e:
 						pre = po_e.split("}")[0]
 						if "[" in pre:
-							pre = pre.split("[")
+							pre = pre.split("[")[0]
 						if pre not in proyections:
 							proyections.append(pre)
 		elif "#" in po.object_map.value:
@@ -4655,6 +4655,9 @@ def translate_postgressql(triples_map):
 	for p in proyections:
 		if p != "None":
 			if p == proyections[len(proyections)-1]:
+				print('CRASH:')
+				print(p)
+				print('---------------')
 				temp_query += "\"" + p + "\""
 			else:
 				temp_query += "\"" + p + "\", " 
